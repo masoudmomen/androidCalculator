@@ -12,66 +12,39 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        button0.setOnClickListener(View.OnClickListener {
-            val txt = mainTxt.text
-            val txt1 = StringBuilder()
-            txt1.append(txt).append("0")
-            mainTxt.setText(txt1)
-        })
 
+
+
+
+        button0.setOnClickListener(View.OnClickListener {
+            buttonAction("0")
+        })
         button1.setOnClickListener(View.OnClickListener {
-            val txt = mainTxt.text
-            val txt1 = StringBuilder()
-            txt1.append(txt).append("1")
-            mainTxt.setText(txt1)
+            buttonAction("1")
         })
         button2.setOnClickListener(View.OnClickListener {
-            val txt = mainTxt.text
-            val txt1 = StringBuilder()
-            txt1.append(txt).append("2")
-            mainTxt.setText(txt1)
+            buttonAction("2")
         })
         button3.setOnClickListener(View.OnClickListener {
-            val txt = mainTxt.text
-            val txt1 = StringBuilder()
-            txt1.append(txt).append("3")
-            mainTxt.setText(txt1)
+            buttonAction("3")
         })
         button4.setOnClickListener(View.OnClickListener {
-            val txt = mainTxt.text
-            val txt1 = StringBuilder()
-            txt1.append(txt).append("4")
-            mainTxt.setText(txt1)
+            buttonAction("4")
         })
         button5.setOnClickListener(View.OnClickListener {
-            val txt = mainTxt.text
-            val txt1 = StringBuilder()
-            txt1.append(txt).append("5")
-            mainTxt.setText(txt1)
+            buttonAction("5")
         })
         button6.setOnClickListener(View.OnClickListener {
-            val txt = mainTxt.text
-            val txt1 = StringBuilder()
-            txt1.append(txt).append("6")
-            mainTxt.setText(txt1)
+            buttonAction("6")
         })
         button7.setOnClickListener(View.OnClickListener {
-            val txt = mainTxt.text
-            val txt1 = StringBuilder()
-            txt1.append(txt).append("7")
-            mainTxt.setText(txt1)
+            buttonAction("7")
         })
         button8.setOnClickListener(View.OnClickListener {
-            val txt = mainTxt.text
-            val txt1 = StringBuilder()
-            txt1.append(txt).append("8")
-            mainTxt.setText(txt1)
+            buttonAction("8")
         })
         button9.setOnClickListener(View.OnClickListener {
-            val txt = mainTxt.text
-            val txt1 = StringBuilder()
-            txt1.append(txt).append("9")
-            mainTxt.setText(txt1)
+            buttonAction("9")
         })
         buttonSum.setOnClickListener(View.OnClickListener {
             val txt = mainTxt.text
@@ -101,4 +74,24 @@ class MainActivity : AppCompatActivity() {
             mainTxt.setText(txt1)
         })
     }
+    fun buttonAction(num: String){
+        if (!CheckCalBoard()){
+            val txt = mainTxt.text
+            val txt1 = StringBuilder()
+            txt1.append(txt).append(num)
+            mainTxt.setText(txt1)
+        }
+        else{
+            mainTxt.setText(num)
+        }
+    }
+     fun CheckCalBoard(): Boolean {
+        val txtchecker = mainTxt.text
+        if (txtchecker?.contains("=")!!) {
+            return true
+        }
+         return false
+     }
 }
+
+
