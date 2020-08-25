@@ -13,9 +13,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-
-
         button0.setOnClickListener(View.OnClickListener {
             buttonAction("0")
         })
@@ -67,14 +64,30 @@ class MainActivity : AppCompatActivity() {
 
         buttonEqual.setOnClickListener(View.OnClickListener {
             val txt = mainTxt.text
-            val txtArray = txt?.split("+")
-            val number = txtArray?.get(0)?.toInt()?.plus(txtArray?.get(1)?.toInt())
-            val txt1 = StringBuilder()
-            txt1.append(txt).append("=").append(number)
-            mainTxt.setText(txt1)
+            var txtArray = arrayOf<String>()
+            if (txt?.contains("+")!! || txt?.contains("-" )!! || txt?.contains("*")!! || txt?.contains("/")!!){
+                txtArray = txt?.split("+","-","*","/").toTypedArray()
+            }
+            if (!(txtArray[txtArray.size] == "+" || txtArray[txtArray.size] == "-" || txtArray[txtArray.size] == "*" ||
+                txtArray[txtArray.size] == "/")){
+                val i = 0
+                for (s in txtArray){
+                    if(s == "/"){
+                        
+                    }
+                }
+
+            }
+
+
+//            val txtArray = txt?.split("+")
+//            val number = txtArray?.get(0)?.toInt()?.plus(txtArray?.get(1)?.toInt())
+//            val txt1 = StringBuilder()
+//            txt1.append(txt).append("=").append(number)
+//            mainTxt.setText(txt1)
         })
     }
-    fun buttonAction(num: String){
+    private fun buttonAction(num: String){
         if (!CheckCalBoard()){
             val txt = mainTxt.text
             val txt1 = StringBuilder()
