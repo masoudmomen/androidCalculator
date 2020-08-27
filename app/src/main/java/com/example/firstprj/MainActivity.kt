@@ -46,45 +46,53 @@ class MainActivity : AppCompatActivity() {
         buttonSum.setOnClickListener(View.OnClickListener {
             val txt = mainTxt.text
             val txt1 = StringBuilder()
-            txt1.append(txt).append("+")
+            txt1.append(txt).append(" + ")
             mainTxt.setText(txt1)
         })
         buttonSubmission.setOnClickListener(View.OnClickListener {
             val txt = mainTxt.text
             val txt1 = StringBuilder()
-            txt1.append(txt).append("-")
+            txt1.append(txt).append(" - ")
             mainTxt.setText(txt1)
         })
         buttonMultiplication.setOnClickListener(View.OnClickListener {
             val txt = mainTxt.text
             val txt1 = StringBuilder()
-            txt1.append(txt).append("*")
+            txt1.append(txt).append(" * ")
+            mainTxt.setText(txt1)
+        })
+        buttonDivision.setOnClickListener(View.OnClickListener {
+            val txt = mainTxt.text
+            val txt1 = StringBuilder()
+            txt1.append(txt).append(" / ")
             mainTxt.setText(txt1)
         })
 
         buttonEqual.setOnClickListener(View.OnClickListener {
-            val txt = mainTxt.text
+            var txt = mainTxt.text
             var txtArray = arrayOf<String>()
-            if (txt?.contains("+")!! || txt?.contains("-" )!! || txt?.contains("*")!! || txt?.contains("/")!!){
-                txtArray = txt?.split("+","-","*","/").toTypedArray()
+            if (txt?.contains("+")!! || txt?.contains("-")!! || txt?.contains("*")!! || txt?.contains(
+                    "/" )!!) {
+                txtArray = txt?.split(" ").toTypedArray()
             }
-            if (!(txtArray[txtArray.size] == "+" || txtArray[txtArray.size] == "-" || txtArray[txtArray.size] == "*" ||
-                txtArray[txtArray.size] == "/")){
-                val i = 0
-                for (s in txtArray){
-                    if(s == "/"){
-                        
+
+            var temp = ""
+            var signTemp = ""
+            for (seq in txtArray) {
+                if (!(seq == "+" || seq == "-" || seq == "/" || seq == "*")) {
+                    if (temp == "") temp = seq
+                    else {
+                        if (signTemp == "+") temp = (temp.toDouble() + seq.toDouble()).toString()
+                        if (signTemp == "-") temp = (temp.toDouble() - seq.toDouble()).toString()
+                        if (signTemp == "*") temp = (temp.toDouble() * seq.toDouble()).toString()
+                        if (signTemp == "/") temp = (temp.toDouble() / seq.toDouble()).toString()
                     }
+                } else {
+                    signTemp = seq
                 }
-
             }
-
-
-//            val txtArray = txt?.split("+")
-//            val number = txtArray?.get(0)?.toInt()?.plus(txtArray?.get(1)?.toInt())
-//            val txt1 = StringBuilder()
-//            txt1.append(txt).append("=").append(number)
-//            mainTxt.setText(txt1)
+            var io = mainTxt.text.toString() + "=" + temp
+            mainTxt.setText(io)
         })
     }
     private fun buttonAction(num: String){
