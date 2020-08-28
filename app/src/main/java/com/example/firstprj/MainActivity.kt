@@ -122,7 +122,7 @@ class MainActivity : AppCompatActivity() {
  // ////////////////////////////////////
 
 
-            var io = mainTxt.text.toString() + "=" + temp
+            var io = mainTxt.text.toString() + " = " + temp
             mainTxt.setText(io)
         })
     }
