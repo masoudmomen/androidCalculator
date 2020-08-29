@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">Claculator</string>
+    <string name="app_name">Calculator With Priority</string>
     <string name="mainBtn">Run</string>
 </resources>

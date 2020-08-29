@@ -45,85 +45,99 @@ class MainActivity : AppCompatActivity() {
         })
         buttonSum.setOnClickListener(View.OnClickListener {
             val txt = mainTxt.text
-            val txt1 = StringBuilder()
-            txt1.append(txt).append(" + ")
-            mainTxt.setText(txt1)
+            if (!txt.isNullOrEmpty() && !txt.endsWith(" ")){
+                val txt1 = StringBuilder()
+                txt1.append(txt).append(" + ")
+                mainTxt.setText(txt1)
+            }
         })
         buttonSubmission.setOnClickListener(View.OnClickListener {
             val txt = mainTxt.text
-            val txt1 = StringBuilder()
-            txt1.append(txt).append(" - ")
-            mainTxt.setText(txt1)
+            if (!txt.isNullOrEmpty() && !txt.endsWith(" ")) {
+                val txt1 = StringBuilder()
+                txt1.append(txt).append(" - ")
+                mainTxt.setText(txt1)
+            }
         })
         buttonMultiplication.setOnClickListener(View.OnClickListener {
             val txt = mainTxt.text
-            val txt1 = StringBuilder()
-            txt1.append(txt).append(" * ")
-            mainTxt.setText(txt1)
+            if (!txt.isNullOrEmpty() && !txt.endsWith(" ")) {
+                val txt1 = StringBuilder()
+                txt1.append(txt).append(" * ")
+                mainTxt.setText(txt1)
+            }
         })
         buttonDivision.setOnClickListener(View.OnClickListener {
             val txt = mainTxt.text
-            val txt1 = StringBuilder()
-            txt1.append(txt).append(" / ")
-            mainTxt.setText(txt1)
+            if (!txt.isNullOrEmpty() && !txt.endsWith(" ")) {
+                val txt1 = StringBuilder()
+                txt1.append(txt).append(" / ")
+                mainTxt.setText(txt1)
+            }
         })
 
         buttonEqual.setOnClickListener(View.OnClickListener {
             var txt = mainTxt.text
-            var txtArray = arrayOf<String>()
-            if (txt?.contains("+")!! || txt?.contains("-")!! || txt?.contains("*")!! || txt?.contains(
-                    "/"
-                )!!
-            ) {
-                txtArray = txt?.split(" ").toTypedArray()
-            }
-            //
+            if (!txt.isNullOrEmpty() && !txt.contains("=") && !txt.endsWith(" ")) {
+                var txtArray = arrayOf<String>()
+                if (txt?.contains("+")!! || txt?.contains("-")!! || txt?.contains("*")!! || txt?.contains(
+                        "/"
+                    )!!
+                ) {
+                    txtArray = txt?.split(" ").toTypedArray()
+                }
+                //
 
 //Multiplication and Division block :
-            var j = 0
-            for (i in txtArray) {
-                if (txtArray[j] == "*") {
-                    for (a in j-1 downTo 0){
-                        if (txtArray[a] == "") continue
-                        txtArray[a] = (txtArray[a].toDouble() * txtArray[j + 1].toDouble()).toString()
-                        break
+                var j = 0
+                for (i in txtArray) {
+                    if (txtArray[j] == "*") {
+                        for (a in j - 1 downTo 0) {
+                            if (txtArray[a] == "") continue
+                            txtArray[a] =
+                                (txtArray[a].toDouble() * txtArray[j + 1].toDouble()).toString()
+                            break
+                        }
+                        txtArray[j] = ""
+                        txtArray[j + 1] = ""
                     }
-                    txtArray[j] = ""
-                    txtArray[j+1] = ""
-                }
-                if (txtArray[j] == "/") {
-                    for (a in j-1 downTo 0){
-                        if (txtArray[a] == "") continue
-                        txtArray[a] = (txtArray[a].toDouble() / txtArray[j + 1].toDouble()).toString()
-                        break
+                    if (txtArray[j] == "/") {
+                        for (a in j - 1 downTo 0) {
+                            if (txtArray[a] == "") continue
+                            txtArray[a] =
+                                (txtArray[a].toDouble() / txtArray[j + 1].toDouble()).toString()
+                            break
+                        }
+                        txtArray[j] = ""
+                        txtArray[j + 1] = ""
                     }
-                    txtArray[j] = ""
-                    txtArray[j+1] = ""
+                    j++
                 }
-                j++
-            }
 // ////////////////////////////////////////////
 
 //sum and Submission block :
-            var temp = ""
-            var signTemp = ""
-            for (seq in txtArray) {
-                if (seq == "") continue
-                if (!(seq == "+" || seq == "-")) {
-                    if (temp == "") temp = seq
-                    else {
-                        if (signTemp == "+") temp = (temp.toDouble() + seq.toDouble()).toString()
-                        if (signTemp == "-") temp = (temp.toDouble() - seq.toDouble()).toString()
+                var temp = ""
+                var signTemp = ""
+                for (seq in txtArray) {
+                    if (seq == "") continue
+                    if (!(seq == "+" || seq == "-")) {
+                        if (temp == "") temp = seq
+                        else {
+                            if (signTemp == "+") temp =
+                                (temp.toDouble() + seq.toDouble()).toString()
+                            if (signTemp == "-") temp =
+                                (temp.toDouble() - seq.toDouble()).toString()
+                        }
+                    } else {
+                        signTemp = seq
                     }
-                } else {
-                    signTemp = seq
                 }
+                // ////////////////////////////////////
+
+
+                var io = mainTxt.text.toString() + " = " + temp
+                mainTxt.setText(io)
             }
- // ////////////////////////////////////
-
-
-            var io = mainTxt.text.toString() + " = " + temp
-            mainTxt.setText(io)
         })
     }
     private fun buttonAction(num: String){
